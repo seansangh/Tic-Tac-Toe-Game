@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+ $(document).ready(function(){
+  $('#me').on('click', function(){
+    $('#computer').html('computer')
+    $('#box2').css('display','block')
+    $('#box1').css('display','none')
+    $('#mot').html('one')
+    $('#turn1').html('Your turn!')
+    $('#turn2').html("Computer's turn")   
+    $('#text1').html('Would you like to <br /> be x or o?')   
+  })
+  $('#me2').on('click', function(){
+    $('#computer').html('player 2')    
+    $('#box2').css('display','block')
+    $('#box1').css('display','none') 
+    $('#mot').html('two')
+    $('#turn1').html("Player 1's turn!")
+    $('#turn2').html("Player 2's turn!")     
+    $('#text1').html('Player 1: Would you </br> like to be x or o?')     
+  })  
+  $('#back').on('click', function(){
+    $('#box2').css('display','none')
+    $('#box1').css('display','block')   
+  })
+  
+  $('#ame3').on('click', function(){
+    $('#a').html('x')
+    $('#b').html('o')
+    $('#box3').css('display','block')
+    $('#box2').css('display','none')
+    if(document.getElementById('mot').textContent=='two'){
+      $('#first').html('player 1')
+      $('#second').html('player 2')
+      $('#turn1').css('opacity','1')
+      $('#turn2').css('opacity','0')
+     }else{
+      $('#first').html('player 1')
+      $('#second').html('computer') 
+      $('#turn1').css('opacity','1')
+      $('#turn2').css('opacity','0')
+     }
+  })
+
+  $('#ame4').on('click', function(){
+    $('#a').html('o')
+    $('#b').html('x')      
+    $('#box3').css('display','block')
+    $('#box2').css('display','none')      
+    if(document.getElementById('mot').textContent=='two'){
+      $('#first').html('player 2')
+      $('#second').html('player 1') 
+      $('#turn2').css('opacity','1')
+      $('#turn1').css('opacity','0')   
+    }else{
+      $('#first').html('computer')
+     $('#second').html('player 1') 
+    }
+  })
+ 
+  $('#reset').on('click', function(){
+    $('#box1').css('display','block')
+    $('#box2').css('display','none')
+    $('#box3').css('display','none')
+    $('#n1').html('0')
+    $('#n2').html('0') 
+    $('#c1').html('')     
+    $('#c2').html('')     
+    $('#c3').html('')     
+    $('#c4').html('')     
+    $('#c5').html('')     
+    $('#c6').html('')
+    $('#c7').html('')     
+    $('#c8').html('')     
+    $('#c9').html('')    
+    $('#count').html('1')       
+  })
+  
+})
+
+
+
+function myF(par){
+ var id=par.target.id;
+ var total=0;
+  
+ for(var i=1; i<=9; i++){
+   if(document.getElementById('c'+i).textContent !=""){
+      total++
+    }
+ }
+  
+  //alert(document.getElementById('second').textContent)
+  if(document.getElementById(id).textContent.length==0){
+ 
+   if((total+1)%2!=0 && document.getElementById('first').textContent=='player 1'){   //alert(document.getElementById('first').textContent)
+
+     $('#turn1').css('opacity','0')
+     $('#turn2').css('opacity','1')
+     document.getElementById(id).innerHTML= document.getElementById('a').textContent
+     total++
+  } else if((total+1)%2!=0 && document.getElementById('first').textContent=='player 2'){   //alert('2')
+
+   $('#turn1').css('opacity','1')
+   $('#turn2').css('opacity','0')
+     document.getElementById(id).innerHTML= document.getElementById('b').textContent   
+    total++
+  }else if((total+1)%2==0 && document.getElementById('second').textContent=='player 1'){   //alert('3')
+
+   $('#turn1').css('opacity','0')
+   $('#turn2').css('opacity','1') 
+     document.getElementById(id).innerHTML= document.getElementById('a').textContent    
+    total++
+  }
+  else if((total+1)%2==0 && document.getElementById('second').textContent=='player 2'){   //alert('4')
+
+    $('#turn2').css('opacity','0')
+    $('#turn1').css('opacity','1')
+     document.getElementById(id).innerHTML= document.getElementById('b').textContent    
+    total++
+  }    
+  
+    
+  }
+  
+  myF2();
+
+  if(document.getElementById('win').textContent==''){
+  if((id=="ame4" && document.getElementById('mot').textContent=='one')||(document.getElementById('mot').textContent=='one' &&(((total+1)%2==0 && document.getElementById('second').textContent=="computer")  || ((total+1)%2!=0 && document.getElementById('first').textContent=="computer")))){ 
+    
+    if(((total+1)%2==0 && document.getElementById('second').textContent=="computer")){
+       var choice='o';
+       }else{
+       var choice='x';  
+       }
+    //alert(document.getElementById('count').textContent)
+   
+    
+  var c1= document.getElementById('c1').textContent;
+  var c2= document.getElementById('c2').textContent;
+  var c3= document.getElementById('c3').textContent;
+  var c4= document.getElementById('c4').textContent;
+  var c5= document.getElementById('c5').textContent;
+  var c6= document.getElementById('c6').textContent;
+  var c7= document.getElementById('c7').textContent;
+  var c8= document.getElementById('c8').textContent;
+  var c9= document.getElementById('c9').textContent;
+  
+  if(c1=='x'){c1=1;}else if(c1=='o'){c1=10;}
+  if(c2=='x'){c2=1;}else if(c2=='o'){c2=10;}
+  if(c3=='x'){c3=1;}else if(c3=='o'){c3=10;}
+  if(c4=='x'){c4=1;}else if(c4=='o'){c4=10;}
+  if(c5=='x'){c5=1;}else if(c5=='o'){c5=10;}
+  if(c6=='x'){c6=1;}else if(c6=='o'){c6=10;}
+  if(c7=='x'){c7=1;}else if(c7=='o'){c7=10;}
+  if(c8=='x'){c8=1;}else if(c8=='o'){c8=10;}
+  if(c9=='x'){c9=1;}else if(c9=='o'){c9=10;}    
+    
+  if(document.getElementById('first')=='player 1'){
+    var comp= 10; var compT= 30; var pers=1; var persT=3;
+  }else{
+var comp= 1; var compT= 3; var pers=10; var persT=30;  }  
+    
+    
+   if(total==0){
+     var q=0; var qarr=[];
+     for(var i=1; i<=9; i++){
+     if(document.getElementById('c'+i).textContent==""){ qarr.push('c'+i); q++
+         /* document.getElementById('c'+i).innerHTML= choice; total++;
+         break;*/
+          }
+     }   document.getElementById(qarr[Math.floor(Math.random()*q)]).innerHTML= choice;
+   }else if((c2=="" && c1+c3+comp== compT) || (c2=="" && c5+c8+comp== compT)) {
+          document.getElementById('c2').innerHTML= choice; total++;           
+   }else if((c1=="" && c2+c3+comp== compT) || (c1=="" && c4+c7+comp== compT) || (c1=="" && c5+c9+comp== compT)) {
+          document.getElementById('c1').innerHTML= choice; total++;           
+   }else if((c3=="" && c1+c2+comp== compT) || (c3=="" && c6+c9+comp== compT) || (c3=="" && c5+c7+comp== compT)) {
+          document.getElementById('c3').innerHTML= choice; total++;           
+   }else if((c4=="" && c1+c7+comp== compT) || (c4=="" && c5+c6+comp== compT)) {
+          document.getElementById('c4').innerHTML= choice; total++;           
+   }else if((c6=="" && c3+c9+comp== compT) || (c6=="" && c5+c4+comp== compT)) {
+          document.getElementById('c6').innerHTML= choice; total++;           
+   }else if((c5=="" && c4+c6+comp== compT) || (c5=="" && c2+c8+comp== compT) || (c5=="" && c1+c9+comp== compT) || (c5=="" && c3+c7+comp== compT)) {
+          document.getElementById('c5').innerHTML= choice; total++;           
+   }else if((c8=="" && c9+c7+comp== compT) || (c8=="" && c5+c2+comp== compT)) {
+          document.getElementById('c8').innerHTML= choice; total++;           
+   }else if((c7=="" && c8+c9+comp== compT) || (c7=="" && c1+c4+comp== compT)  || (c7=="" && c5+c3+comp== compT)) {
+          document.getElementById('c7').innerHTML= choice; total++;           
+   }else if((c9=="" && c8+c7+comp== compT) || (c9=="" && c6+c3+comp== compT) || (c9=="" && c5+c1+comp== compT)) {
+          document.getElementById('c9').innerHTML= choice; total++;           
+   }else if((c2=="" && c1+c3+pers== persT) || (c2=="" && c5+c8+pers== persT)) {
+          document.getElementById('c2').innerHTML= choice; total++;           
+   }else if((c1=="" && c2+c3+pers== persT) || (c1=="" && c4+c7+pers== persT) || (c1=="" && c5+c9+pers== persT)) {
+          document.getElementById('c1').innerHTML= choice; total++;           
+   }else if((c3=="" && c1+c2+pers== persT) || (c3=="" && c6+c9+pers== persT) || (c3=="" && c5+c7+pers== pers)) {
+          document.getElementById('c3').innerHTML= choice; total++;           
+   }else if((c4=="" && c1+c7+pers== persT) || (c4=="" && c5+c6+pers== persT)) {
+          document.getElementById('c4').innerHTML= choice; total++;           
+   }else if((c6=="" && c3+c9+pers== persT) || (c6=="" && c5+c4+pers== persT)) {
+          document.getElementById('c6').innerHTML= choice; total++;           
+   }else if((c5=="" && c4+c6+pers== persT) || (c5=="" && c2+c8+pers== persT) || (c5=="" && c1+c9+pers== persT) || (c5=="" && c3+c7+pers== persT)) {
+          document.getElementById('c5').innerHTML= choice; total++;           
+   }else if((c8=="" && c9+c7+pers== persT) || (c8=="" && c5+c2+pers== persT)) {
+          document.getElementById('c8').innerHTML= choice; total++;           
+   }else if((c7=="" && c8+c9+pers== persT) || (c7=="" && c1+c4+pers== persT)) {
+          document.getElementById('c7').innerHTML= choice; total++;           
+   }else if((c9=="" && c8+c7+pers== persT) || (c9=="" && c6+c3+pers== persT) || (c9=="" && c5+c1+pers== persT)) {
+          document.getElementById('c9').innerHTML= choice; total++;           
+   }else{
+  var q=0; var qarr=[];
+     for(var i=1; i<=9; i++){
+     if(document.getElementById('c'+i).textContent==""){ qarr.push('c'+i); q++
+         /* document.getElementById('c'+i).innerHTML= choice; total++;
+         break;*/
+          }
+     }   document.getElementById(qarr[Math.floor(Math.random()*q)]).innerHTML= choice;
+   }
+
+    $('#turn2').css('opacity','0')
+    $('#turn1').css('opacity','1')
+    
+  myF2(); 
+  }  
+}
+  
+  if(document.getElementById('win').textContent!=''){
+    var win=document.getElementById('win').textContent;
+    
+    switch(win){
+      case 'x':
+        alert('x wins')
+        if(document.getElementById('first').textContent=='player 1'){document.getElementById('n2').innerHTML=parseInt(document.getElementById('n2').textContent)+1}else{
+          {document.getElementById('n1').innerHTML=parseInt(document.getElementById('n1').textContent)+1}
+        }
+      break;
+      case 'o':
+        alert('o wins')
+ if(document.getElementById('first').textContent=='player 1'){document.getElementById('n1').innerHTML=parseInt(document.getElementById('n1').textContent)+1}else{
+          {document.getElementById('n2').innerHTML=parseInt(document.getElementById('n2').textContent)+1}
+        }        
+      break;
+      case 'no':
+        alert('stalemate')
+      break;        
+    }
+document.getElementById('win').innerHTML='';
+$('#c1').html('')     
+$('#c2').html('')     
+$('#c3').html('')     
+$('#c4').html('')     
+$('#c5').html('')     
+$('#c6').html('')
+$('#c7').html('')     
+$('#c8').html('')     
+$('#c9').html('')  
+
+if(document.getElementById('a')=='x'){
+  $('#turn1').css('opacity','1')
+  $('#turn2').css('opacity','0')
+}else{
+  $('#turn2').css('opacity','1')
+  $('#turn1').css('opacity','0')
+}
+    
+  }
+  
+  
+ }
+
+
+
+function myF2(val){
+  var c1= document.getElementById('c1').textContent;
+  var c2= document.getElementById('c2').textContent;
+  var c3= document.getElementById('c3').textContent;
+  var c4= document.getElementById('c4').textContent;
+  var c5= document.getElementById('c5').textContent;
+  var c6= document.getElementById('c6').textContent;
+  var c7= document.getElementById('c7').textContent;
+  var c8= document.getElementById('c8').textContent;
+  var c9= document.getElementById('c9').textContent;
+  
+  if(c1=='x'){c1=1;}else if(c1=='o'){c1=10;}
+  if(c2=='x'){c2=1;}else if(c2=='o'){c2=10;}
+  if(c3=='x'){c3=1;}else if(c3=='o'){c3=10;}
+  if(c4=='x'){c4=1;}else if(c4=='o'){c4=10;}
+  if(c5=='x'){c5=1;}else if(c5=='o'){c5=10;}
+  if(c6=='x'){c6=1;}else if(c6=='o'){c6=10;}
+  if(c7=='x'){c7=1;}else if(c7=='o'){c7=10;}
+  if(c8=='x'){c8=1;}else if(c8=='o'){c8=10;}
+  if(c9=='x'){c9=1;}else if(c9=='o'){c9=10;}
+ var total=0;
+  
+ for(var i=1; i<=9; i++){
+   if(document.getElementById('c'+i).textContent !=""){
+      total++
+    }
+ }
+  
+  if(c1+c2+c3==3||c4+c5+c6==3||c7+c8+c9==3||c1+c4+c7==3||c2+c5+c8==3||c3+c6+c9==3||c1+c5+c9==3||c3+c5+c7==3){
+    //alert('x wins') 
+    document.getElementById('win').innerHTML="x";
+  }
+  else if(c1+c2+c3==30||c4+c5+c6==30||c7+c8+c9==30||c1+c4+c7==30||c2+c5+c8==30||c3+c6+c9==30||c1+c5+c9==30||c3+c5+c7==30){
+    //alert('o wins') 
+    document.getElementById('win').innerHTML="o";
+  }
+  else if(total==9){
+    document.getElementById('win').innerHTML="no";
+    //alert('stalemate')
+  }
+
+}   
+    
+    
+    </script>
+  </head>
+  <body>
+    <div id="outside">
+      
+      <div id="inside">
+        <div id="box1" class="box">
+          <h1>Tic Tac Toe: </br>How many players?</h1>
+        <p class="aa"><aa id="me">One Player</aa> <ab id="me2">Two Players</ab></p>
+        </div>
+
+         <div id="box2" class="box">
+          <h1 id="text1">Would you like to <br /> be x or o?</h1>
+        <p class="aa"><ba id="ame3" value="x">X</ba> <bb id="ame4" onClick=myF(event)>O</bb></p>
+           <p id="back"><i class="fa fa-arrow-left"></i> Back</p>
+        </div>
+ 
+      <div id="box3" class="box">
+ <div id="topper">
+   <div id="turn1">Your turn!</div>
+   <div id="turn2">Computer's turn</div>
+      <div id="score2">
+        <p id="n1">0</p>
+        <p id="n2">0</p>
+      </div>
+      <div id="score">
+      <p id="player">player 1</p>
+      <p id="divide">|</p>   
+      <p id="computer">computer</p>
+      </div>
+      <p id="reset">Reset All</p>
+    </div>        
+        <div id="content">
+          <div class="col-4" id="c1" onclick="myF(event)"></div>
+          <div class="col-4" id="c2" onclick="myF(event)"></div>
+          <div class="col-4" id="c3" onclick="myF(event)"></div>
+          <div class="col-4" id="c4" onclick="myF(event)"></div>
+          <div class="col-4" id="c5" onclick="myF(event)"></div>
+          <div class="col-4" id="c6" onclick="myF(event)"></div>
+          <div class="col-4" id="c7" onclick="myF(event)"></div>
+          <div class="col-4" id="c8" onclick="myF(event)"></div>
+          <div class="col-4" id="c9" onclick="myF(event)"></div>
+          
+          
+          
+          <div class="no">
+            <h1 id="hehe">You are <k id="a">x</k> <j id="b">o</j><br/><l id="mot">players</l>  </h1>
+            <p id="total"></p>
+            <p id="first"></p>
+            <p id="second"></p>
+            <p id="count">1</p>
+            <p id="win"></p>
+            
+        <p class="aa"><ba id="ame3" value="x">X</ba> <bb id="ame4">O</bb></p>
+          </div>
+        </div>
+      </div>
+      
+      </div>
+    
+    </div>
+  </body>
+</html>
